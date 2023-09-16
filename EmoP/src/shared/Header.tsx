@@ -1,8 +1,11 @@
-import { ABOUT_ROUTE, HOME_ROUTE, REG_ROUTE, TICKET_ROUTE } from '@/app/consts';
-import { User } from 'lucide-react';
+import { ABOUT_ROUTE, ADMIN_ROUTE, HOME_ROUTE, REG_ROUTE, TICKET_ROUTE } from '@/app/consts';
+import { Shield, User } from 'lucide-react';
+
 const Header = () => {
-    return (
-<header>
+  const storedIsAuth = localStorage.getItem("isAuth");
+  
+  return (
+    <header>
       <div className="brandname">
         <a href={HOME_ROUTE}>Emotion</a>
       </div>
@@ -23,12 +26,18 @@ const Header = () => {
         </ul>
       </div>
       <div className="loginh">
-        <a href={REG_ROUTE}>
-          Войти  <User />{" "}
-        </a>
+        {storedIsAuth === "true" ? (
+          <a href={ADMIN_ROUTE}>
+            Админ панель  <Shield  />{" "}
+          </a>
+        ) : (
+          <a href={REG_ROUTE}>
+            Войти  <User />{" "}
+          </a>
+        )}
       </div>
     </header>
-    );
+  );
 };
 
 export default Header;

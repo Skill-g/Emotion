@@ -1,6 +1,7 @@
 import Footer from "@/shared/Footer";
 import Header from "@/shared/Header";
 import { useState } from "react";
+
 const TicketBody = () => {
   const [formData, setFormData] = useState({
     login: "",
@@ -12,12 +13,11 @@ const TicketBody = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // Обработчик отправки формы
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/pCheck", {
+      const response = await fetch("http://localhost:8000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -26,19 +26,28 @@ const TicketBody = () => {
       });
 
       if (response.ok) {
-        alert("Ваша заявка отправлена на рассмотрение");
+        const data = await response.json();
+        if (data.message === 'Аутентификация успешна') {
+          const expirationTime = new Date().getTime() + 3600 * 1000;
+          localStorage.setItem('isAuth', 'true');
+          localStorage.setItem('authExpiration', expirationTime.toString());
+          
+          alert('Вход успешно выполнен');
+        } else {
+          alert('Неверный логин или пароль');
+        }
       } else {
-        alert("Заявка отправлена");
+        alert('Произошла ошибка при отправке данных');
       }
     } catch (error) {
-      console.error("Увы заявка не дошла, попробуйте позже!", error);
+      console.error("Произошла ошибка при отправке данных", error);
       alert("Произошла ошибка при отправке данных");
     }
   };
 
   return (
     <>
-      <Header></Header>
+      <Header />
       <div className="containers">
         <div className="Ticket-top">
           <div className="Ticket-block">
@@ -65,7 +74,7 @@ const TicketBody = () => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 };

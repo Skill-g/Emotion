@@ -1,5 +1,7 @@
-import { ADMIN_ROUTE, HOME_ROUTE, LOGIN_ROUTE, REG_ROUTE, TICKET_ROUTE } from "./app/consts.tsx";
+import { ADMIN_PAGE_THEMES, ADMIN_PAGE_TICKETS, ADMIN_ROUTE, HOME_ROUTE, LOGIN_ROUTE, REG_ROUTE, TICKET_ROUTE } from "./app/consts.tsx";
 import Admin from "./pages/AdminPage/Admin";
+import Admin_Page_Themes from "./pages/AdminPage/Admin_Page_Themes.tsx";
+import Admin_Page_Tickets from "./pages/AdminPage/Admin_Page_Tickets.tsx";
 import Auth from "./pages/AuthPage/Auth.tsx";
 import Home from "./pages/HomePage/Home.tsx";
 import Ticket from "./pages/TicketPage/Ticket.tsx";
@@ -8,8 +10,15 @@ export const AuthRoutes = [
         path: ADMIN_ROUTE,
         Component: Admin,
     },
-]
-    
+    {
+        path: ADMIN_PAGE_TICKETS,
+        Component: Admin_Page_Tickets,
+    },
+    {
+        path: ADMIN_PAGE_THEMES,
+        Component: Admin_Page_Themes,
+    },
+];
 
 export const PubRoutes = [
     {
@@ -28,5 +37,4 @@ export const PubRoutes = [
         path: TICKET_ROUTE,
         Component: Ticket,
     },
-
-]
+];
