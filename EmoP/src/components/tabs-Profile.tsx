@@ -55,6 +55,10 @@ export function TabsProfile() {
         description =
           "В базе данных данные были измененны, теперь вы можете войти с новыми данными";
       }
+      else {
+        title = "Ошибка!";
+        description = "Вы ошиблись в введенных данных, либо наша база данных не функционирует"
+      }
     } catch (error) {
       title = "Ошибка";
       description =
@@ -119,6 +123,7 @@ export function TabsProfile() {
             >
               Сохранить изменения
             </Button>
+            <Toaster />
           </CardFooter>
         </Card>
       </TabsContent>

@@ -1,16 +1,22 @@
+import { LOGIN_ROUTE } from "@/app/consts";
 import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/components/ui/use-toast";
 import Footer from "@/shared/Footer";
 import Header from "@/shared/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TicketBody = () => {
   const [formData, setFormData] = useState({
     login: "",
     password: "",
   });
-  let title = "";
-  let description = "";
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const isAuth = localStorage.getItem("isAuth");
+    setIsAuthenticated(isAuth === "true");
+  }, []);
 
   const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
@@ -34,28 +40,35 @@ const TicketBody = () => {
         localStorage.setItem("isAuth", "true");
         localStorage.setItem("authExpiration", expirationTime.toString());
 
-        title = "Успешно!";
-        description =
-          "Вы вошли в аккаунт, страница будет перезагружена через 5 секунд";
+        toast({
+          title: "Успешно!",
+          description:
+            "Вы вошли в аккаунт, страница будет перезагружена через 5 секунд",
+        });
 
         setTimeout(() => {
           window.location.reload();
         }, 5000);
       } else {
-        title = "Ошибка!";
-        description =
-          "Запрос не может быть обработан сервером, или вы ввели неправильные данные";
+        toast({
+          title: "Ошибка!",
+          description:
+            "Запрос не может быть обработан сервером, или вы ввели неправильные данные",
+        });
       }
     } catch (error) {
-      title = "Ошибка!";
-      description =
-        "Проверьте данные, либо наш сервер не может их обработать";
-    } finally {
       toast({
-        title: title,
-        description: description,
+        title: "Ошибка!",
+        description: "Проверьте данные, либо наш сервер не может их обработать",
       });
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("isAuth");
+    localStorage.removeItem("authExpiration");
+    setIsAuthenticated(false);
+    window.location.href = LOGIN_ROUTE;
   };
 
   return (
@@ -65,26 +78,35 @@ const TicketBody = () => {
         <div className="Ticket-top">
           <div className="Ticket-block">
             <div className="Ticket-Background">
-              <form className="form-ticket" onSubmit={handleSubmit}>
-                <h1>Авторизация</h1>
-                <input
-                  type="text"
-                  name="login"
-                  placeholder="Логин"
-                  value={formData.login}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="password"
-                  name="password"
-                  autoComplete="on"
-                  placeholder="Пароль"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                />
-                <button>Войти</button>
-                <Toaster />
-              </form>
+              {isAuthenticated ? (
+                <div>
+                  <form  className="form-ticket" action="">
+                  <h1>Вы авторизованы</h1>
+                  <button onClick={handleLogout}>Разлогиниться</button>
+                  </form>
+                </div>
+              ) : (
+                <form className="form-ticket" onSubmit={handleSubmit}>
+                  <h1>Авторизация</h1>
+                  <input
+                    type="text"
+                    name="login"
+                    placeholder="Логин"
+                    value={formData.login}
+                    onChange={handleInputChange}
+                  />
+                  <input
+                    type="password"
+                    name="password"
+                    autoComplete="on"
+                    placeholder="Пароль"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                  />
+                  <button>Войти</button>
+                  <Toaster />
+                </form>
+              )}
             </div>
           </div>
         </div>

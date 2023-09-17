@@ -71,13 +71,13 @@ export default function setupRoutes(app, db) {
       if (existingUserRows.length === 0) {
         return res
           .status(404)
-          .json({ error: "Пользователь с указанным логином не найден" });
+          .json({ error: "Неверный логин или пароль" });
       }
 
       const user = existingUserRows[0];
 
       if (user.password !== oldPassword) {
-        return res.status(401).json({ error: "Неверный старый пароль" });
+        return res.status(401).json({ error: "Неверный логин или пароль" });
       }
 
       const updateSql =
