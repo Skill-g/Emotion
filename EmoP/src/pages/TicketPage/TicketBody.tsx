@@ -1,4 +1,7 @@
+import { Toaster } from "@/components/ui/toaster";
+import { toast } from "@/components/ui/use-toast";
 import { useState } from "react";
+
 const TicketBody = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -7,7 +10,10 @@ const TicketBody = () => {
     message: "",
   });
 
-  const handleInputChange = (e: { target: { name: any; value: any } }) => {
+  let title = "";
+  let description = "";
+
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     if (name === "number" && !/^\d{0,11}$/.test(value)) {
       return;
@@ -16,7 +22,7 @@ const TicketBody = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     try {
@@ -29,13 +35,20 @@ const TicketBody = () => {
       });
 
       if (response.ok) {
-        alert("Ваша заявка отправлена на рассмотрение");
+          title = "Отправлено!";
+          description = "В скором времени мы примем меры";
       } else {
-        alert("Заявка отправлена");
+        title = "Ошибка";
+        description = "Наш сервер не может обработать вашу заявку, попробуйте позже";
       }
     } catch (error) {
-      console.error("Увы заявка не дошла, попробуйте позже!", error);
-      alert("Произошла ошибка при отправке данных");
+      title = "Ошибка";
+      description = "Произошла ошибка при отправке заявки";
+    } finally {
+      toast({
+        title: title,
+        description: description,
+      });
     }
   };
 
@@ -61,15 +74,15 @@ const TicketBody = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                 />
-<input
-  type="text"
-  name="number"
-  placeholder="+7 (999) 999-99-99"
-  value={formData.number}
-  onChange={handleInputChange}
-  maxLength={11}
-  minLength={11}
-/>
+                <input
+                  type="text"
+                  name="number"
+                  placeholder="+7 (999) 999-99-99"
+                  value={formData.number}
+                  onChange={handleInputChange}
+                  maxLength={11}
+                  minLength={11}
+                />
 
                 <textarea
                   name="message"
@@ -81,6 +94,12 @@ const TicketBody = () => {
                   onChange={handleInputChange}
                 ></textarea>
                 <button
+                  onClick={() => {
+                    toast({
+                      title: "Ожидайте!",
+                      description: "Ваша заявка обрабатывается на сервере",
+                    });
+                  }}
                   type="submit"
                   disabled={formData.number.length !== 11}
                   className={
@@ -93,6 +112,7 @@ const TicketBody = () => {
                     ? "Заполните все поля"
                     : "Отправить"}
                 </button>
+                <Toaster />
               </form>
             </div>
           </div>

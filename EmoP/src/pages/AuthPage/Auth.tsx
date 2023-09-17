@@ -1,3 +1,5 @@
+import { Toaster } from "@/components/ui/toaster";
+import { toast } from "@/components/ui/use-toast";
 import Footer from "@/shared/Footer";
 import Header from "@/shared/Header";
 import { useState } from "react";
@@ -7,6 +9,8 @@ const TicketBody = () => {
     login: "",
     password: "",
   });
+  let title = "";
+  let description = "";
 
   const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
@@ -26,22 +30,31 @@ const TicketBody = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        if (data.message === 'Аутентификация успешна') {
-          const expirationTime = new Date().getTime() + 3600 * 1000;
-          localStorage.setItem('isAuth', 'true');
-          localStorage.setItem('authExpiration', expirationTime.toString());
-          
-          alert('Вход успешно выполнен');
-        } else {
-          alert('Неверный логин или пароль');
-        }
+        const expirationTime = new Date().getTime() + 3600 * 1000;
+        localStorage.setItem("isAuth", "true");
+        localStorage.setItem("authExpiration", expirationTime.toString());
+
+        title = "Успешно!";
+        description =
+          "Вы вошли в аккаунт, страница будет перезагружена через 5 секунд";
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 5000);
       } else {
-        alert('Произошла ошибка при отправке данных');
+        title = "Ошибка!";
+        description =
+          "Запрос не может быть обработан сервером, или вы ввели неправильные данные";
       }
     } catch (error) {
-      console.error("Произошла ошибка при отправке данных", error);
-      alert("Произошла ошибка при отправке данных");
+      title = "Ошибка!";
+      description =
+        "Проверьте данные, либо наш сервер не может их обработать";
+    } finally {
+      toast({
+        title: title,
+        description: description,
+      });
     }
   };
 
@@ -64,11 +77,13 @@ const TicketBody = () => {
                 <input
                   type="password"
                   name="password"
+                  autoComplete="on"
                   placeholder="Пароль"
                   value={formData.password}
                   onChange={handleInputChange}
                 />
                 <button>Войти</button>
+                <Toaster />
               </form>
             </div>
           </div>

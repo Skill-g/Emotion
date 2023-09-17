@@ -1,0 +1,15 @@
+{
+    "name": "project",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "server": "cd Server && nodemon index.js",
+        "client": "cd Emop && npm run dev",
+        "all": "concurrently \"npm run server\" \"npm run client\""
+    },
+    "dependencies": {
+        "concurrently": "^8.2.1",
+        "nodemon": "^3.0.1"
+    }
+}
