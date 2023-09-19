@@ -4,6 +4,7 @@ import Admin_Page_Profile from "./pages/AdminPage/Admin_Page_Profile.tsx";
 import Admin_Page_Themes from "./pages/AdminPage/Admin_Page_Themes.tsx";
 import Admin_Page_Tickets from "./pages/AdminPage/Admin_Page_Tickets.tsx";
 import Auth from "./pages/AuthPage/Auth.tsx";
+import Reg from "./pages/AuthPage/Reg.tsx";
 import Home from "./pages/HomePage/Home.tsx";
 import Ticket from "./pages/TicketPage/Ticket.tsx";
 export const AuthRoutes = [
@@ -36,7 +37,7 @@ export const PubRoutes = [
     },
     {
         path: REG_ROUTE,
-        Component: Auth,
+        Component: Reg,
     },
     {
         path: TICKET_ROUTE,

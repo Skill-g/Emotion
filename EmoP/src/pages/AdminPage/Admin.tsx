@@ -1,11 +1,11 @@
 import { ADMIN_PAGE_PROFILE, ADMIN_PAGE_THEMES, ADMIN_PAGE_TICKETS, HOME_ROUTE, LOGIN_ROUTE } from "@/app/consts";
 import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
 } from "@/components/ui/command";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { ThemeProvider } from "@/components/ui/theme-provider";
@@ -39,6 +39,7 @@ const Admin = () => {
               </CommandItem>
               <CommandItem><a href={ADMIN_PAGE_TICKETS}>Заявки</a></CommandItem>
               <CommandItem><a href={ADMIN_PAGE_THEMES}>Темы сайта</a></CommandItem>
+              <CommandItem><a href={ADMIN_PAGE_THEMES}>Чат с пользователями</a></CommandItem>
               <CommandItem>
                 <a href={HOME_ROUTE}>Выйти</a>
               </CommandItem>

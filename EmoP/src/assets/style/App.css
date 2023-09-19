@@ -597,6 +597,19 @@ footer .social a {
   -o-border-radius: 10px;
 }
 
+.btnform {
+  width: 100%;
+  margin-top: 10px;
+  background-color: #ffffff;
+  color: #9ca39d;
+  border-radius: 10px;
+  padding: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
 .black-background-button {
   background: black !important;
 }

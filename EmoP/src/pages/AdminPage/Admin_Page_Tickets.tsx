@@ -1,4 +1,4 @@
-import { DataTable } from "@/app/tickets/table";
+import { DataTable } from "@/app/Tickets/table";
 
 const Admin_Page_Tickets = () => {
     return (

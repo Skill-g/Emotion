@@ -1,4 +1,4 @@
-import { LOGIN_ROUTE } from "@/app/consts";
+import { LOGIN_ROUTE, REG_ROUTE } from "@/app/consts";
 import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/components/ui/use-toast";
 import Footer from "@/shared/Footer";
@@ -105,8 +105,11 @@ const TicketBody = () => {
                   />
                   <button>Войти</button>
                   <Toaster />
+                  
                 </form>
+                
               )}
+              <button className="btnform" onClick={() => { window.location.href = REG_ROUTE; }}>Регистрация</button>
             </div>
           </div>
         </div>

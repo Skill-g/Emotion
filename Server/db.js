@@ -1,20 +1,17 @@
-import mysql from 'mysql2/promise';
+import { PrismaClient } from '@prisma/client';
 
-const dbConfig = {
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'emotion',
-};
+const prisma = new PrismaClient();
 
 const connectToDB = async () => {
   try {
-    const connection = await mysql.createConnection(dbConfig);
-    console.log('Connected to MySQL database');
-    return connection;
+    await prisma.$connect();
+    console.log("Connected to MySQL database");
+
+    return prisma;
   } catch (error) {
-    console.error('Error connecting to MySQL:', error);
+    console.error("Error connecting to MySQL:", error);
     throw error;
   }
 };
+
 export default connectToDB;

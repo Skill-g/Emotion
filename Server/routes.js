@@ -1,23 +1,24 @@
-export default function setupRoutes(app, db) {
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+export default function setupRoutes(app) {
   app.post("/addTicket", async (req, res) => {
     const { name, email, number, message } = req.body;
 
     try {
-      const connection = await db();
+      await prisma.ticket.create({
+        data: {
+          name,
+          email,
+          number,
+          message,
+        },
+      });
 
-      const sql =
-        "INSERT INTO ticket (name, email, number, message) VALUES (?, ?, ?, ?)";
-      const values = [name, email, number, message];
-
-      await connection.execute(sql, values);
-
-      connection.end();
-
-      res
-        .status(200)
-        .json({ message: "Данные успешно добавлены в базу данных" });
+      res.status(200).json({ message: "Данные успешно добавлены в базу данных" });
     } catch (error) {
-      console.error("Error inserting data into MySQL:", error);
+      console.error("Error inserting data into Prisma:", error);
       res.status(500).json({
         error: "Произошла ошибка при добавлении данных в базу данных",
       });
@@ -28,74 +29,92 @@ export default function setupRoutes(app, db) {
     const { login, password } = req.body;
 
     try {
-      const connection = await db();
+      const user = await prisma.users.findFirst({
+        where: {
+          login,
+        },
+      });
 
-      const [rows] = await connection.execute(
-        "SELECT * FROM users WHERE login = ?",
-        [login]
-      );
-
-      if (rows.length === 0) {
+      if (!user) {
         return res.status(401).json({ error: "Неверный логин или пароль" });
       }
 
-      const user = rows[0];
-
       if (user.password === password) {
-        res
-          .status(200)
-          .json({ success: true, message: "Аутентификация успешна" });
+        res.status(200).json({ success: true, message: "Аутентификация успешна" });
       } else {
-        res
-          .status(401)
-          .json({ success: false, error: "Неверный логин или пароль" });
+        res.status(401).json({ success: false, error: "Неверный логин или пароль" });
       }
-
-      connection.end();
     } catch (error) {
       console.error("Error authenticating user:", error);
       res.status(500).json({ error: "Произошла ошибка при аутентификации" });
     }
   });
+
   app.post("/updateUser", async (req, res) => {
     const { oldLogin, newLogin, newPassword, oldPassword } = req.body;
 
     try {
-      const connection = await db();
+      const existingUser = await prisma.users.findFirst({
+        where: {
+          login: oldLogin,
+        },
+      });
 
-      const [existingUserRows] = await connection.execute(
-        "SELECT * FROM users WHERE login = ?",
-        [oldLogin]
-      );
-
-      if (existingUserRows.length === 0) {
-        return res
-          .status(404)
-          .json({ error: "Неверный логин или пароль" });
+      if (!existingUser) {
+        return res.status(404).json({ error: "Неверный логин или пароль" });
       }
 
-      const user = existingUserRows[0];
-
-      if (user.password !== oldPassword) {
+      if (existingUser.password !== oldPassword) {
         return res.status(401).json({ error: "Неверный логин или пароль" });
       }
 
-      const updateSql =
-        "UPDATE users SET login = ?, password = ? WHERE login = ?";
-      const updateValues = [newLogin, newPassword, oldLogin];
+      await prisma.users.update({
+        where: {
+          login: oldLogin,
+        },
+        data: {
+          login: newLogin,
+          password: newPassword,
+        },
+      });
 
-      await connection.execute(updateSql, updateValues);
-
-      connection.end();
-
-      res
-        .status(200)
-        .json({ message: "Данные пользователя успешно обновлены" });
+      res.status(200).json({ message: "Данные пользователя успешно обновлены" });
     } catch (error) {
       console.error("Error updating user data:", error);
       res
         .status(500)
         .json({ error: "Произошла ошибка при обновлении данных пользователя" });
+    }
+  });
+  app.post("/reg", async (req, res) => {
+    const { login, password } = req.body;
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  
+    try {
+      const existingUser = await prisma.users.findFirst({
+        where: {
+          login,
+        },
+      });
+  
+      if (existingUser) {
+        return res.status(400).json({ error: "Пользователь с таким логином уже существует" });
+      }
+  
+      const role = (await prisma.users.count()) === 0 ? "owner" : "user";
+  
+      const newUser = await prisma.users.create({
+        data: {
+          login,
+          password,
+          role,
+        },
+      });
+  
+      res.status(201).json({ message: "Пользователь успешно зарегистрирован", user: newUser });
+    } catch (error) {
+      console.error("Error registering user:", error);
+      res.status(500).json({ error: "Произошла ошибка при регистрации пользователя" });
     }
   });
 }

@@ -1,4 +1,4 @@
-import { ABOUT_ROUTE, ADMIN_ROUTE, HOME_ROUTE, REG_ROUTE, TICKET_ROUTE } from '@/app/consts';
+import { ABOUT_ROUTE, ADMIN_ROUTE, HOME_ROUTE, LOGIN_ROUTE, TICKET_ROUTE } from '@/app/consts';
 import { Shield, User } from 'lucide-react';
 
 const Header = () => {
@@ -31,7 +31,7 @@ const Header = () => {
             Админ панель  <Shield  />{" "}
           </a>
         ) : (
-          <a href={REG_ROUTE}>
+          <a href={LOGIN_ROUTE}>
             Войти  <User />{" "}
           </a>
         )}
