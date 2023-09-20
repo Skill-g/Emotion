@@ -18,12 +18,12 @@ const TicketBody = () => {
     setIsAuthenticated(isAuth === "true");
   }, []);
 
-  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
+  const handleInputChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
     try {
@@ -80,9 +80,9 @@ const TicketBody = () => {
             <div className="Ticket-Background">
               {isAuthenticated ? (
                 <div>
-                  <form  className="form-ticket" action="">
-                  <h1>Вы авторизованы</h1>
-                  <button onClick={handleLogout}>Разлогиниться</button>
+                  <form className="form-ticket" action="">
+                    <h1>Вы авторизованы</h1>
+                    <button onClick={handleLogout}>Разлогиниться</button>
                   </form>
                 </div>
               ) : (
@@ -105,11 +105,19 @@ const TicketBody = () => {
                   />
                   <button>Войти</button>
                   <Toaster />
-                  
                 </form>
-                
               )}
-              <button className="btnform" onClick={() => { window.location.href = REG_ROUTE; }}>Регистрация</button>
+              
+              {!isAuthenticated && (
+                <button
+                  className="btnform"
+                  onClick={() => {
+                    window.location.href = REG_ROUTE;
+                  }}
+                >
+                  Регистрация
+                </button>
+              )}
             </div>
           </div>
         </div>

@@ -8,8 +8,32 @@ const TicketBody = () => {
     email: "",
     number: "",
     message: "",
+    setemoji: "",
   });
-
+  const handleEmojiChange = (e: { target: { value: any; }; }) => {
+    const setemojiValue = e.target.value;
+    let setemojiNumber = 0;
+    switch (setemojiValue) {
+      case "😀":
+        setemojiNumber = 1;
+        break;
+      case "🙂":
+        setemojiNumber = 2;
+        break;
+      case "😐":
+        setemojiNumber = 3;
+        break;
+      case "🙁":
+        setemojiNumber = 4;
+        break;
+      case "☹️":
+        setemojiNumber = 5;
+        break;
+      default:
+        setemojiNumber = 0;
+    }
+    setFormData({ ...formData, setemoji: setemojiNumber.toString() });
+  };
   let title = "";
   let description = "";
 
@@ -25,6 +49,16 @@ const TicketBody = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
+    if (formData.setemoji === "") {
+      title = "Ошибка";
+      description = "Пожалуйста, выберите ваше состояние (emoji)";
+      toast({
+        title: title,
+        description: description,
+      });
+      return;
+    }
+
     try {
       const response = await fetch("http://localhost:8000/addTicket", {
         method: "POST",
@@ -35,11 +69,12 @@ const TicketBody = () => {
       });
 
       if (response.ok) {
-          title = "Отправлено!";
-          description = "В скором времени мы примем меры";
+        title = "Отправлено!";
+        description = "В скором времени мы примем меры";
       } else {
         title = "Ошибка";
-        description = "Наш сервер не может обработать вашу заявку, попробуйте позже";
+        description =
+          "Наш сервер не может обработать вашу заявку, попробуйте позже";
       }
     } catch (error) {
       title = "Ошибка";
@@ -93,6 +128,50 @@ const TicketBody = () => {
                   value={formData.message}
                   onChange={handleInputChange}
                 ></textarea>
+                <div className="customEmojiSelect">
+                  <h1>Выберете ваше состояние</h1>
+                  <input
+                    type="radio"
+                    className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
+                    value="😀"
+                    name="collection[emoji]"
+                    checked={formData.setemoji === "1"}
+                    onChange={handleEmojiChange}
+                  />
+                  <input
+                    type="radio"
+                    className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
+                    value="🙂"
+                    name="collection[emoji]"
+                    checked={formData.setemoji === "2"}
+                    onChange={handleEmojiChange}
+                  />
+                  <input
+                    type="radio"
+                    className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
+                    value="😐"
+                    name="collection[emoji]"
+                    checked={formData.setemoji === "3"}
+                    onChange={handleEmojiChange}
+                  />
+                  <input
+                    type="radio"
+                    className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
+                    value="🙁"
+                    name="collection[emoji]"
+                    checked={formData.setemoji === "4"}
+                    onChange={handleEmojiChange}
+                  />
+                  <input
+                    type="radio"
+                    className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
+                    value="☹️"
+                    name="collection[emoji]"
+                    checked={formData.setemoji === "5"}
+                    onChange={handleEmojiChange}
+                  />
+                </div>
+
                 <button
                   onClick={() => {
                     toast({

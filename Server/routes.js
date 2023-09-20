@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export default function setupRoutes(app) {
   app.post("/addTicket", async (req, res) => {
-    const { name, email, number, message } = req.body;
+    const { name, email, number, message, setemoji } = req.body;
 
     try {
       await prisma.ticket.create({
@@ -13,6 +13,7 @@ export default function setupRoutes(app) {
           email,
           number,
           message,
+          setemoji,
         },
       });
 
@@ -115,6 +116,15 @@ export default function setupRoutes(app) {
     } catch (error) {
       console.error("Error registering user:", error);
       res.status(500).json({ error: "Произошла ошибка при регистрации пользователя" });
+    }
+  });
+  app.get("/getTickets", async (req, res) => {
+    try {
+      const tickets = await prisma.ticket.findMany();
+      res.status(200).json(tickets);
+    } catch (error) {
+      console.error("Error fetching tickets:", error);
+      res.status(500).json({ error: "Произошла ошибка при получении заявок" });
     }
   });
 }

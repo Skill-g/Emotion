@@ -1,6 +1,6 @@
 export const ADMIN_ROUTE = '/admin'
-export const ADMIN_PAGE_TICKETS = '/admin/themes'
-export const ADMIN_PAGE_THEMES = '/admin/tickets'
+export const ADMIN_PAGE_TICKETS = '/admin/tickets'
+export const ADMIN_PAGE_THEMES = '/admin/themes'
 export const LOGIN_ROUTE = '/login'
 export const REG_ROUTE = '/reg'
 export const HOME_ROUTE = '/'

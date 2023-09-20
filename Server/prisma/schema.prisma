@@ -8,16 +8,17 @@ datasource db {
 }
 
 model ticket {
-  name    String  @db.Text
-  email   String  @db.Text
-  number  String? @db.VarChar(12)
-  id      Int     @id @default(autoincrement())
-  message String? @db.Text
+  name     String  @db.Text
+  email    String  @db.Text
+  number   String? @db.VarChar(12)
+  id       Int     @id @default(autoincrement())
+  message  String? @db.Text
+  setemoji String? @db.Text
 }
 
 model users {
-  id       Int     @id @default(autoincrement())
-  login    String  @db.Text
-  password String  @db.Text
-  role     String  @db.Text
+  id       Int    @id @default(autoincrement())
+  login    String @db.Text
+  password String @db.Text
+  role     String @db.Text
 }
