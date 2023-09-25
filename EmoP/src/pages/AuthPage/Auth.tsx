@@ -43,12 +43,9 @@ const TicketBody = () => {
         toast({
           title: "Успешно!",
           description:
-            "Вы вошли в аккаунт, страница будет перезагружена через 5 секунд",
+            "Вы вошли в аккаунт!",
         });
-
-        setTimeout(() => {
           window.location.reload();
-        }, 5000);
       } else {
         toast({
           title: "Ошибка!",

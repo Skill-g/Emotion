@@ -119,9 +119,24 @@ export default function setupRoutes(app) {
     }
   });
   app.get("/getTickets", async (req, res) => {
+    function numberToEmoji(number) {
+      const emojiMap = {
+        1: "😀",
+        2: "🙂",
+        3: "😐",
+        4: "🙁",
+        5: "☹️",
+      };
+      return emojiMap[number] || "❓";
+    }
+  
     try {
       const tickets = await prisma.ticket.findMany();
-      res.status(200).json(tickets);
+      const ticketsWithEmoji = tickets.map((ticket) => ({
+        ...ticket,
+        setemoji: numberToEmoji(ticket.setemoji),
+      }));
+      res.status(200).json(ticketsWithEmoji);
     } catch (error) {
       console.error("Error fetching tickets:", error);
       res.status(500).json({ error: "Произошла ошибка при получении заявок" });

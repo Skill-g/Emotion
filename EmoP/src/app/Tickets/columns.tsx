@@ -4,13 +4,13 @@ import { Button } from "@/components/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 export type Tickets = {
-  id: string
+  id: number
   name: string
   status: "pending" | "processing" | "success" | "failed"
   email: string
   message: string
-  number: string
-  setemoji: string
+  number: number
+  setemoji: number
 }
 
 export const columns: ColumnDef<Tickets>[] = [
@@ -86,6 +86,7 @@ export const columns: ColumnDef<Tickets>[] = [
   },
   {
     accessorKey: "setemoji",
+    
     header: ({ column }) => {
       return (
         <Button

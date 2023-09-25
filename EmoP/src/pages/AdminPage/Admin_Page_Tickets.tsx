@@ -21,6 +21,9 @@ async function getData(): Promise<Tickets[]> {
   }
 }
 
+
+
+
 const Admin_Page_Tickets = () => {
   const [data, setData] = React.useState<Tickets[] | null>(null);
 
