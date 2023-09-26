@@ -1,3 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/components/ui/use-toast";
 import { useState } from "react";
@@ -10,7 +16,7 @@ const TicketBody = () => {
     message: "",
     setemoji: "",
   });
-  const handleEmojiChange = (e: { target: { value: any; }; }) => {
+  const handleEmojiChange = (e: { target: { value: string } }) => {
     const setemojiValue = e.target.value;
     let setemojiNumber = 0;
     switch (setemojiValue) {
@@ -130,46 +136,73 @@ const TicketBody = () => {
                 ></textarea>
                 <div className="customEmojiSelect">
                   <h1>Выберете ваше состояние</h1>
-                  <input
-                    type="radio"
-                    className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
-                    value="😀"
-                    name="collection[emoji]"
-                    checked={formData.setemoji === "1"}
-                    onChange={handleEmojiChange}
-                  />
-                  <input
-                    type="radio"
-                    className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
-                    value="🙂"
-                    name="collection[emoji]"
-                    checked={formData.setemoji === "2"}
-                    onChange={handleEmojiChange}
-                  />
-                  <input
-                    type="radio"
-                    className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
-                    value="😐"
-                    name="collection[emoji]"
-                    checked={formData.setemoji === "3"}
-                    onChange={handleEmojiChange}
-                  />
-                  <input
-                    type="radio"
-                    className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
-                    value="🙁"
-                    name="collection[emoji]"
-                    checked={formData.setemoji === "4"}
-                    onChange={handleEmojiChange}
-                  />
-                  <input
-                    type="radio"
-                    className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
-                    value="☹️"
-                    name="collection[emoji]"
-                    checked={formData.setemoji === "5"}
-                    onChange={handleEmojiChange}
-                  />
+                  <HoverCard>
+                    <HoverCardTrigger>
+                      <input
+                        type="radio"
+                        className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
+                        value="😀"
+                        name="collection[emoji]"
+                        checked={formData.setemoji === "1"}
+                        onChange={handleEmojiChange}
+                      />
+                      <HoverCardContent>Это веселый смайлик!</HoverCardContent>
+                    </HoverCardTrigger>
+                  </HoverCard>
+                  <HoverCard>
+                    <HoverCardTrigger>
+                      <input
+                        type="radio"
+                        className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
+                        value="🙂"
+                        name="collection[emoji]"
+                        checked={formData.setemoji === "2"}
+                        onChange={handleEmojiChange}
+                      />
+                      <HoverCardContent>Вам хорошо!</HoverCardContent>
+                    </HoverCardTrigger>
+                  </HoverCard>
+                  <HoverCard>
+                    <HoverCardTrigger>
+                      <input
+                        type="radio"
+                        className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
+                        value="😐"
+                        name="collection[emoji]"
+                        checked={formData.setemoji === "3"}
+                        onChange={handleEmojiChange}
+                      />
+                      <HoverCardContent>
+                        Все нормально, но вам не хорошо и не плохо
+                      </HoverCardContent>
+                    </HoverCardTrigger>
+                  </HoverCard>
+                  <HoverCard>
+                    <HoverCardTrigger>
+                      <input
+                        type="radio"
+                        className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
+                        value="🙁"
+                        name="collection[emoji]"
+                        checked={formData.setemoji === "4"}
+                        onChange={handleEmojiChange}
+                      />
+                      <HoverCardContent>Вам не хорошо</HoverCardContent>
+                    </HoverCardTrigger>
+                  </HoverCard>
+                  <HoverCard>
+                    <HoverCardTrigger>
+                      <input
+                        type="radio"
+                        className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
+                        value="☹️"
+                        name="collection[emoji]"
+                        checked={formData.setemoji === "5"}
+                        onChange={handleEmojiChange}
+                      />
+                      <HoverCardContent>Вам кардинально не нравится ваше состояние</HoverCardContent>
+                    </HoverCardTrigger>
+                  </HoverCard>
                 </div>
 
                 <button

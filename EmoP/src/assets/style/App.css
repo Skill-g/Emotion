@@ -236,9 +236,6 @@ footer .social a {
   .mobile {
     display: none !important;
   }
-  footer {
-    position: fixed;
-  }
   footer .footer-bottom {
     display: flex;
     justify-content: center;

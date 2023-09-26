@@ -18,7 +18,7 @@ const Header = () => {
             <a href={ABOUT_ROUTE}>О нас </a>
           </li>
           <li>
-            <a href={TICKET_ROUTE}>Заявки</a>
+            <a href={TICKET_ROUTE}>Обращения</a>
           </li>
           <li>
             <a href="/contacts">Контакты</a>

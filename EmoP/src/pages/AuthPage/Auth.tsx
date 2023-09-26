@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LOGIN_ROUTE, REG_ROUTE } from "@/app/consts";
 import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/components/ui/use-toast";
@@ -43,9 +44,12 @@ const TicketBody = () => {
         toast({
           title: "Успешно!",
           description:
-            "Вы вошли в аккаунт!",
+            "Вы вошли в аккаунт",
         });
+
+        setTimeout(() => {
           window.location.reload();
+        }, 1000);
       } else {
         toast({
           title: "Ошибка!",
