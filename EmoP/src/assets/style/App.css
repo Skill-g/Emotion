@@ -37,7 +37,6 @@ header {
   display: flex;
   justify-content: center;
   transition: all 0.15s 0s ease-out;
-  margin-left: 5%;
 }
 
 .menu li {
@@ -91,7 +90,7 @@ header {
   font-style: normal;
   background-color: #4790c7;
   border-radius: 0.3125rem;
-  margin-right: 4%;
+  margin-right: 2%;
   align-items: center;
 }
 
@@ -260,7 +259,6 @@ footer .social a {
   margin-left: auto;
   margin-right: auto;
   margin-top: 10%;
-  width: 50%;
   background: url(../../assets/img/LowB.svg);
   width: 600px;
   height: 600px;
@@ -314,6 +312,7 @@ footer .social a {
   display: flex;
   margin-top: -90px;
   flex-direction: column;
+  text-align: center;
 }
 
 .BullyingText {

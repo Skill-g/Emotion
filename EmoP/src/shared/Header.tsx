@@ -15,13 +15,10 @@ const Header = () => {
             <a href={HOME_ROUTE} className='mobile'>Главная страница</a>
           </li>
           <li>
-            <a href={ABOUT_ROUTE}>О нас </a>
+            <a href={ABOUT_ROUTE}>Часто задаваемые вопросы</a>
           </li>
           <li>
             <a href={TICKET_ROUTE}>Обращения</a>
-          </li>
-          <li>
-            <a href="/contacts">Контакты</a>
           </li>
         </ul>
       </div>

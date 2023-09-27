@@ -17,8 +17,9 @@ const HomeBody = () => {
                   </h1>
                   <div className="sub">
                     <p>Если у вас имеются проблемы, обратитесь к нам</p>
+                    <Button className="buttonhelp mt-2"><a href={TICKET_ROUTE}>Получить помощь</a></Button>
                   </div>
-                 <a href={TICKET_ROUTE}><Button className="buttonhelp">Получить помощь</Button></a>
+                 
                 </div>
               </div>
             </div>

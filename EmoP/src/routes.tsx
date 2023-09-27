@@ -1,4 +1,5 @@
-import { ADMIN_PAGE_PROFILE, ADMIN_PAGE_STAT, ADMIN_PAGE_THEMES, ADMIN_PAGE_TICKETS, ADMIN_ROUTE, HOME_ROUTE, LOGIN_ROUTE, REG_ROUTE, TICKET_ROUTE } from "./app/consts.tsx";
+import { ABOUT_ROUTE, ADMIN_PAGE_PROFILE, ADMIN_PAGE_STAT, ADMIN_PAGE_THEMES, ADMIN_PAGE_TICKETS, ADMIN_ROUTE, HOME_ROUTE, LOGIN_ROUTE, REG_ROUTE, TICKET_ROUTE } from "./app/consts.tsx";
+import About from "./pages/AboutUsPage/About.tsx";
 import Admin from "./pages/AdminPage/Admin";
 import Admin_Page_Profile from "./pages/AdminPage/Admin_Page_Profile.tsx";
 import Admin_Page_Stat from "./pages/AdminPage/Admin_Page_Stat.tsx";
@@ -47,5 +48,9 @@ export const PubRoutes = [
     {
         path: TICKET_ROUTE,
         Component: Ticket,
+    },
+    {
+        path: ABOUT_ROUTE,
+        Component: About,
     },
 ];
