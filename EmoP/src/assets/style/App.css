@@ -692,3 +692,16 @@ footer .social a {
   content: attr(value);
 }
 
+.checkbox {
+  padding: 0px !important;
+}
+
+
+[type=checkbox]:checked + span:before {/* <-- ставим иконку, когда чекбокс включен  */
+  content: '\2714';
+  position: absolute;
+  top: -5px;
+  left: 0;
+  font-size:23px;
+  color:green;
+}

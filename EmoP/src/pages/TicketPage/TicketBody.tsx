@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   HoverCard,
   HoverCardContent,
@@ -6,7 +7,8 @@ import {
 } from "@/components/ui/hover-card";
 import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/components/ui/use-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import TextMask from "react-text-mask";
 
 const TicketBody = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +18,42 @@ const TicketBody = () => {
     message: "",
     setemoji: "",
   });
+  const phoneNumberMask = [
+    "+",
+    "7",
+    " ",
+    "(",
+    /[1-9]/,
+    /\d/,
+    /\d/,
+    ")",
+    " ",
+    /\d/,
+    /\d/,
+    /\d/,
+    "-",
+    /\d/,
+    /\d/,
+    "-",
+    /\d/,
+    /\d/,
+  ];
+
+  const [showFields, setShowFields] = useState(true);
+
+  const isPhoneNumberValid = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/.test(
+    formData.number
+  );
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = () => {
+    setChecked(!checked);
+    setShowFields(!checked);
+  };
+
+  useEffect(() => {
+    setShowFields(!checked);
+  }, [checked]);
 
   const emojis = [
     { emoji: "😀", label: "Ваше состояние отличное!" },
@@ -36,9 +74,6 @@ const TicketBody = () => {
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
-    if (name === "number" && !/^\d{0,11}$/.test(value)) {
-      return;
-    }
 
     setFormData({ ...formData, [name]: value });
   };
@@ -92,30 +127,33 @@ const TicketBody = () => {
             <div className="Ticket-Background">
               <form className="form-ticket" onSubmit={handleSubmit}>
                 <h1>Обращения</h1>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Введите Имя"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="text"
-                  name="number"
-                  placeholder="+7 (999) 999-99-99"
-                  value={formData.number}
-                  onChange={handleInputChange}
-                  maxLength={11}
-                  minLength={11}
-                />
-
+                {showFields && (
+                  <>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Введите Имя"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                    />
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                    />
+                    <TextMask
+                      mask={phoneNumberMask}
+                      guide={false}
+                      type="tel"
+                      name="number"
+                      placeholder="+7 (999) 999-99-99"
+                      value={formData.number}
+                      onChange={handleInputChange}
+                    />
+                  </>
+                )}
                 <textarea
                   name="message"
                   cols={10}
@@ -125,6 +163,16 @@ const TicketBody = () => {
                   value={formData.message}
                   onChange={handleInputChange}
                 ></textarea>
+                <div className="flex text-white items-end">
+                  <Checkbox
+                    className="checkbox"
+                    data-state={checked}
+                    onClick={handleChange}
+                  >
+                    <input type="checkbox" />
+                  </Checkbox>
+                  <p className="ml-2 mb-0.5">Я хочу оставить заявку анонимно</p>
+                </div>
                 <div className="customEmojiSelect">
                   <h1>Выберете ваше состояние</h1>
                   {emojis.map((emoji, index) => (
@@ -152,16 +200,12 @@ const TicketBody = () => {
                     });
                   }}
                   type="submit"
-                  disabled={formData.number.length !== 11}
+                  disabled={!isPhoneNumberValid}
                   className={
-                    formData.number.length !== 11
-                      ? "black-background-button"
-                      : ""
+                    !isPhoneNumberValid ? "black-background-button" : ""
                   }
                 >
-                  {formData.number.length !== 11
-                    ? "Заполните все поля"
-                    : "Отправить"}
+                  {!isPhoneNumberValid ? "Заполните все поля" : "Отправить"}
                 </button>
                 <Toaster />
               </form>
