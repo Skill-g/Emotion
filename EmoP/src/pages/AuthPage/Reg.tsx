@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LOGIN_ROUTE } from "@/app/consts";
 import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/components/ui/use-toast";
@@ -18,12 +19,14 @@ const RegistrationBody = () => {
     setIsRegistered(isReg === "true");
   }, []);
 
-  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
+  const handleInputChange = (e: {
+    target: { name: any; value: any };
+  }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
     if (isRegistered) {
@@ -46,7 +49,8 @@ const RegistrationBody = () => {
       if (response.ok) {
         toast({
           title: "Успешно!",
-          description: "Вы успешно зарегистрировались, вы будете перенаправлены на страницу 'Войти' через 5 секунд",
+          description:
+            "Вы успешно зарегистрировались, вы будете перенаправлены на страницу 'Войти' через 5 секунд",
         });
         setTimeout(() => {
           window.location.href = LOGIN_ROUTE;
@@ -54,8 +58,7 @@ const RegistrationBody = () => {
       } else if (response.status === 400) {
         toast({
           title: "Ошибка!",
-          description:
-            "Пользователь с таким логином уже зарегистрирован",
+          description: "Пользователь с таким логином уже зарегистрирован",
         });
       } else {
         toast({

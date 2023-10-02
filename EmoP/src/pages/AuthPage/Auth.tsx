@@ -43,8 +43,7 @@ const TicketBody = () => {
 
         toast({
           title: "Успешно!",
-          description:
-            "Вы вошли в аккаунт",
+          description: "Вы вошли в аккаунт",
         });
 
         setTimeout(() => {
@@ -108,7 +107,7 @@ const TicketBody = () => {
                   <Toaster />
                 </form>
               )}
-              
+
               {!isAuthenticated && (
                 <button
                   className="btnform"

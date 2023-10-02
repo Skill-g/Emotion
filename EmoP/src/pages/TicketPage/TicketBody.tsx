@@ -81,7 +81,7 @@ const TicketBody = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (formData.setemoji === "") {
+    if (!checked && formData.setemoji === "") {
       title = "Ошибка";
       description = "Пожалуйста, выберите ваше состояние (emoji)";
       toast({
@@ -200,12 +200,16 @@ const TicketBody = () => {
                     });
                   }}
                   type="submit"
-                  disabled={!isPhoneNumberValid}
+                  disabled={!isPhoneNumberValid && !checked}
                   className={
-                    !isPhoneNumberValid ? "black-background-button" : ""
+                    !isPhoneNumberValid && !checked
+                      ? "black-background-button"
+                      : ""
                   }
                 >
-                  {!isPhoneNumberValid ? "Заполните все поля" : "Отправить"}
+                  {!isPhoneNumberValid && !checked
+                    ? "Заполните все поля"
+                    : "Отправить"}
                 </button>
                 <Toaster />
               </form>
