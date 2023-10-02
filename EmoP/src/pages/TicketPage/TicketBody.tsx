@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   HoverCard,
   HoverCardContent,
@@ -6,7 +7,8 @@ import {
 } from "@/components/ui/hover-card";
 import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/components/ui/use-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import TextMask from "react-text-mask";
 
 const TicketBody = () => {
   const [formData, setFormData] = useState({
@@ -16,28 +18,55 @@ const TicketBody = () => {
     message: "",
     setemoji: "",
   });
-  const handleEmojiChange = (e: { target: { value: string } }) => {
+  const phoneNumberMask = [
+    "+",
+    "7",
+    " ",
+    "(",
+    /[1-9]/,
+    /\d/,
+    /\d/,
+    ")",
+    " ",
+    /\d/,
+    /\d/,
+    /\d/,
+    "-",
+    /\d/,
+    /\d/,
+    "-",
+    /\d/,
+    /\d/,
+  ];
+
+  const [showFields, setShowFields] = useState(true);
+
+  const isPhoneNumberValid = /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/.test(
+    formData.number
+  );
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = () => {
+    setChecked(!checked);
+    setShowFields(!checked);
+  };
+
+  useEffect(() => {
+    setShowFields(!checked);
+  }, [checked]);
+
+  const emojis = [
+    { emoji: "😀", label: "Ваше состояние отличное!" },
+    { emoji: "🙂", label: "Вам хорошо!" },
+    { emoji: "😐", label: "Все нормально, но вам не хорошо и не плохо" },
+    { emoji: "🙁", label: "Вам не хорошо" },
+    { emoji: "☹️", label: "Вам кардинально не нравится ваше состояние" },
+  ];
+
+  const handleEmojiChange = (e: { target: { value: any } }) => {
     const setemojiValue = e.target.value;
-    let setemojiNumber = 0;
-    switch (setemojiValue) {
-      case "😀":
-        setemojiNumber = 1;
-        break;
-      case "🙂":
-        setemojiNumber = 2;
-        break;
-      case "😐":
-        setemojiNumber = 3;
-        break;
-      case "🙁":
-        setemojiNumber = 4;
-        break;
-      case "☹️":
-        setemojiNumber = 5;
-        break;
-      default:
-        setemojiNumber = 0;
-    }
+    const setemojiNumber =
+      emojis.findIndex((emoji) => emoji.emoji === setemojiValue) + 1;
     setFormData({ ...formData, setemoji: setemojiNumber.toString() });
   };
   let title = "";
@@ -45,9 +74,6 @@ const TicketBody = () => {
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
-    if (name === "number" && !/^\d{0,11}$/.test(value)) {
-      return;
-    }
 
     setFormData({ ...formData, [name]: value });
   };
@@ -55,7 +81,7 @@ const TicketBody = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (formData.setemoji === "") {
+    if (!checked && formData.setemoji === "") {
       title = "Ошибка";
       description = "Пожалуйста, выберите ваше состояние (emoji)";
       toast({
@@ -101,30 +127,33 @@ const TicketBody = () => {
             <div className="Ticket-Background">
               <form className="form-ticket" onSubmit={handleSubmit}>
                 <h1>Обращения</h1>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Введите Имя"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                />
-                <input
-                  type="text"
-                  name="number"
-                  placeholder="+7 (999) 999-99-99"
-                  value={formData.number}
-                  onChange={handleInputChange}
-                  maxLength={11}
-                  minLength={11}
-                />
-
+                {showFields && (
+                  <>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Введите Имя"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                    />
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                    />
+                    <TextMask
+                      mask={phoneNumberMask}
+                      guide={false}
+                      type="tel"
+                      name="number"
+                      placeholder="+7 (999) 999-99-99"
+                      value={formData.number}
+                      onChange={handleInputChange}
+                    />
+                  </>
+                )}
                 <textarea
                   name="message"
                   cols={10}
@@ -134,75 +163,33 @@ const TicketBody = () => {
                   value={formData.message}
                   onChange={handleInputChange}
                 ></textarea>
+                <div className="flex text-white items-end">
+                  <Checkbox
+                    className="checkbox"
+                    data-state={checked}
+                    onClick={handleChange}
+                  >
+                    <input type="checkbox" />
+                  </Checkbox>
+                  <p className="ml-2 mb-0.5">Я хочу оставить заявку анонимно</p>
+                </div>
                 <div className="customEmojiSelect">
                   <h1>Выберете ваше состояние</h1>
-                  <HoverCard>
-                    <HoverCardTrigger>
-                      <input
-                        type="radio"
-                        className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
-                        value="😀"
-                        name="collection[emoji]"
-                        checked={formData.setemoji === "1"}
-                        onChange={handleEmojiChange}
-                      />
-                      <HoverCardContent>Это веселый смайлик!</HoverCardContent>
-                    </HoverCardTrigger>
-                  </HoverCard>
-                  <HoverCard>
-                    <HoverCardTrigger>
-                      <input
-                        type="radio"
-                        className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
-                        value="🙂"
-                        name="collection[emoji]"
-                        checked={formData.setemoji === "2"}
-                        onChange={handleEmojiChange}
-                      />
-                      <HoverCardContent>Вам хорошо!</HoverCardContent>
-                    </HoverCardTrigger>
-                  </HoverCard>
-                  <HoverCard>
-                    <HoverCardTrigger>
-                      <input
-                        type="radio"
-                        className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
-                        value="😐"
-                        name="collection[emoji]"
-                        checked={formData.setemoji === "3"}
-                        onChange={handleEmojiChange}
-                      />
-                      <HoverCardContent>
-                        Все нормально, но вам не хорошо и не плохо
-                      </HoverCardContent>
-                    </HoverCardTrigger>
-                  </HoverCard>
-                  <HoverCard>
-                    <HoverCardTrigger>
-                      <input
-                        type="radio"
-                        className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
-                        value="🙁"
-                        name="collection[emoji]"
-                        checked={formData.setemoji === "4"}
-                        onChange={handleEmojiChange}
-                      />
-                      <HoverCardContent>Вам не хорошо</HoverCardContent>
-                    </HoverCardTrigger>
-                  </HoverCard>
-                  <HoverCard>
-                    <HoverCardTrigger>
-                      <input
-                        type="radio"
-                        className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
-                        value="☹️"
-                        name="collection[emoji]"
-                        checked={formData.setemoji === "5"}
-                        onChange={handleEmojiChange}
-                      />
-                      <HoverCardContent>Вам кардинально не нравится ваше состояние</HoverCardContent>
-                    </HoverCardTrigger>
-                  </HoverCard>
+                  {emojis.map((emoji, index) => (
+                    <HoverCard key={index}>
+                      <HoverCardTrigger>
+                        <input
+                          type="radio"
+                          className="customEmojiSelect-input emojif customEmojiSelect-input emojiafter"
+                          value={emoji.emoji}
+                          name="collection[emoji]"
+                          checked={formData.setemoji === (index + 1).toString()}
+                          onChange={handleEmojiChange}
+                        />
+                        <HoverCardContent>{emoji.label}</HoverCardContent>
+                      </HoverCardTrigger>
+                    </HoverCard>
+                  ))}
                 </div>
 
                 <button
@@ -213,14 +200,14 @@ const TicketBody = () => {
                     });
                   }}
                   type="submit"
-                  disabled={formData.number.length !== 11}
+                  disabled={!isPhoneNumberValid && !checked}
                   className={
-                    formData.number.length !== 11
+                    !isPhoneNumberValid && !checked
                       ? "black-background-button"
                       : ""
                   }
                 >
-                  {formData.number.length !== 11
+                  {!isPhoneNumberValid && !checked
                     ? "Заполните все поля"
                     : "Отправить"}
                 </button>

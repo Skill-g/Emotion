@@ -6,19 +6,21 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import { ArrowLeft } from "lucide-react";
 
 const Admin_Page_Profile = () => {
-    return (
-        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-            
-        <div className="containers flex justify-center w-auto h-screen content-center flex-wrap">
-        <a href={ADMIN_ROUTE}><Button className="absolute left-5 top-5 text-center"><ArrowLeft/></Button></a>
+  return (
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <div className="containers flex justify-center w-auto h-screen content-center flex-wrap">
+        <a href={ADMIN_ROUTE}>
+          <Button className="absolute left-5 top-5 text-center ">
+            <ArrowLeft />
+          </Button>
+        </a>
         <ModeToggle></ModeToggle>
-            <div className="flex justify-center h-80">
-                <TabsProfile/>
-                </div>
-          
+        <div className="flex justify-center h-80 a-form">
+          <TabsProfile />
         </div>
-        </ThemeProvider>
-    );
+      </div>
+    </ThemeProvider>
+  );
 };
 
 export default Admin_Page_Profile;

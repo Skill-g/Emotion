@@ -1,4 +1,11 @@
-import { ADMIN_PAGE_PROFILE, ADMIN_PAGE_STAT, ADMIN_PAGE_THEMES, ADMIN_PAGE_TICKETS, HOME_ROUTE, LOGIN_ROUTE } from "@/app/consts";
+import {
+  ADMIN_PAGE_PROFILE,
+  ADMIN_PAGE_STAT,
+  ADMIN_PAGE_THEMES,
+  ADMIN_PAGE_TICKETS,
+  HOME_ROUTE,
+  LOGIN_ROUTE,
+} from "@/app/consts";
 import {
   Command,
   CommandEmpty,
@@ -37,16 +44,26 @@ const Admin = () => {
               <CommandItem>
                 <a href={ADMIN_PAGE_PROFILE}>Профиль</a>
               </CommandItem>
-              <CommandItem><a href={ADMIN_PAGE_TICKETS}>Заявки</a></CommandItem>
-              <CommandItem><a href={ADMIN_PAGE_THEMES}>Темы сайта</a></CommandItem>
-              <CommandItem><a href={ADMIN_PAGE_THEMES}>Чат с пользователями</a></CommandItem>
-              <CommandItem><a href={ADMIN_PAGE_STAT}>Статистика и данные</a></CommandItem>
+              <CommandItem>
+                <a href={ADMIN_PAGE_TICKETS}>Заявки</a>
+              </CommandItem>
+              <CommandItem>
+                <a href={ADMIN_PAGE_THEMES}>Темы сайта</a>
+              </CommandItem>
+              <CommandItem>
+                <a href={ADMIN_PAGE_THEMES}>Чат с пользователями</a>
+              </CommandItem>
+              <CommandItem>
+                <a href={ADMIN_PAGE_STAT}>Статистика и данные</a>
+              </CommandItem>
               <CommandItem>
                 <a href={HOME_ROUTE}>Выйти</a>
               </CommandItem>
-                <CommandItem>
-                <a onClick={handleLogout} href={LOGIN_ROUTE}>Выйти из профиля администратора </a>
-                </CommandItem>
+              <CommandItem>
+                <a onClick={handleLogout} href={LOGIN_ROUTE}>
+                  Выйти из профиля администратора{" "}
+                </a>
+              </CommandItem>
             </CommandGroup>
           </CommandList>
         </Command>

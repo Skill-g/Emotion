@@ -75,13 +75,12 @@ const Footer = () => {
           <div className="copyright"></div>
 
           <div className="social">
-
             <a href="#">
               <Chrome />
             </a>
 
             <a href="#">
-            <Instagram />
+              <Instagram />
             </a>
           </div>
         </div>

@@ -21,9 +21,6 @@ async function getData(): Promise<Tickets[]> {
   }
 }
 
-
-
-
 const Admin_Page_Tickets = () => {
   const [data, setData] = React.useState<Tickets[] | null>(null);
 
@@ -39,11 +36,15 @@ const Admin_Page_Tickets = () => {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-    <div className="container mx-auto py-10 h-screen">
-    <a href={ADMIN_ROUTE}><Button className="absolute left-5 top-5 text-center"><ArrowLeft/></Button></a>
+      <div className="container mx-auto py-10 h-screen">
+        <a href={ADMIN_ROUTE}>
+          <Button className="absolute left-5 top-5 text-center">
+            <ArrowLeft />
+          </Button>
+        </a>
         <ModeToggle></ModeToggle>
-      {data ? <DataTable columns={columns} data={data} /> : <p>Loading...</p>}
-    </div>
+        {data ? <DataTable columns={columns} data={data} /> : <p>Loading...</p>}
+      </div>
     </ThemeProvider>
   );
 };
