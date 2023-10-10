@@ -4,7 +4,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/components/ui/use-toast";
 import Footer from "@/shared/Footer";
 import Header from "@/shared/Header";
-import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { useState } from "react";
 
 const TicketBody = () => {
   const [formData, setFormData] = useState({
@@ -14,11 +15,10 @@ const TicketBody = () => {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {
-    const isAuth = localStorage.getItem("isAuth");
-    setIsAuthenticated(isAuth === "true");
-  }, []);
-
+  const isAuthedAdmin = Cookies.get("isAuthAdmin") === "true";
+  const isUserAuthed = Cookies.get("isUser") === "true";
+  console.log (isAuthedAdmin);
+  console.log (isUserAuthed);
   const handleInputChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -34,13 +34,10 @@ const TicketBody = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
+        credentials: "include",
       });
 
       if (response.ok) {
-        const expirationTime = new Date().getTime() + 3600 * 1000;
-        localStorage.setItem("isAuth", "true");
-        localStorage.setItem("authExpiration", expirationTime.toString());
-
         toast({
           title: "Успешно!",
           description: "Вы вошли в аккаунт",
@@ -65,8 +62,8 @@ const TicketBody = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("isAuth");
-    localStorage.removeItem("authExpiration");
+    Cookies.remove("isAuthAdmin");
+    Cookies.remove("isUser");
     setIsAuthenticated(false);
     window.location.href = LOGIN_ROUTE;
   };
@@ -78,7 +75,7 @@ const TicketBody = () => {
         <div className="Ticket-top">
           <div className="Ticket-block">
             <div className="Ticket-Background">
-              {isAuthenticated ? (
+              {isAuthedAdmin || isUserAuthed ? (
                 <div>
                   <form className="form-ticket" action="">
                     <h1>Вы авторизованы</h1>
@@ -105,18 +102,17 @@ const TicketBody = () => {
                   />
                   <button>Войти</button>
                   <Toaster />
+                  {!isAuthenticated && (
+                    <button
+                      className="btnform"
+                      onClick={() => {
+                        window.location.href = REG_ROUTE;
+                      }}
+                    >
+                      Регистрация
+                    </button>
+                  )}
                 </form>
-              )}
-
-              {!isAuthenticated && (
-                <button
-                  className="btnform"
-                  onClick={() => {
-                    window.location.href = REG_ROUTE;
-                  }}
-                >
-                  Регистрация
-                </button>
               )}
             </div>
           </div>

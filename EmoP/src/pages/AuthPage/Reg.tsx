@@ -34,7 +34,7 @@ const RegistrationBody = () => {
         title: "Ошибка!",
         description: "С данного компьютера уже была регистрация",
       });
-      return; // Don't proceed with registration if already registered
+      return;
     }
 
     try {

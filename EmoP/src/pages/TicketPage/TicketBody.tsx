@@ -10,6 +10,8 @@ import { toast } from "@/components/ui/use-toast";
 import { useEffect, useState } from "react";
 import TextMask from "react-text-mask";
 
+
+
 const TicketBody = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -18,6 +20,7 @@ const TicketBody = () => {
     message: "",
     setemoji: "",
   });
+
   const phoneNumberMask = [
     "+",
     "7",

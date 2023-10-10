@@ -17,51 +17,37 @@ const Footer = () => {
               <li>
                 <a href={ABOUT_ROUTE}>О нас</a>
               </li>
+            </ul>
+          </div>
 
+          <div className="links">
+            <h3 className="quick-links-h3">Наши контакты</h3>
+
+            <ul>
               <li>
-                <a href="{NEW_ROUTE}">Новое</a>
+                <a href="https://www.instagram.com/kipk_colledji/">Instagram</a>
+              </li>
+              <li>
+                <a href="https://kipk.edu.kz/">Сайт KIPK</a>
               </li>
             </ul>
           </div>
 
           <div className="links">
-            <h3 className="services-h3">Наши контакты</h3>
+            <h3 className="quick-links-h3">Получить помощь</h3>
 
             <ul>
               <li>
-                <a href="#">Instagram</a>
-              </li>
-              <li>
-                <a href="#">VK</a>
-              </li>
-              <li>
-                <a href="#">Сайт KIPK</a>
-              </li>
-
-              <li>
-                <a href="#"></a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="links">
-            <h3 className="categories-h3">Оставить обращение</h3>
-
-            <ul>
-              <li>
-                <a href="#">Анонимное обращение</a>
+                <a href="">Анонимное обращение</a>
               </li>
               <li>
                 <a href="#">Связяться с психологом</a>
               </li>
-              <li>
-                <a href="#">Просмотреть статус обращения</a>
-              </li>
             </ul>
           </div>
 
           <div className="links">
-            <h3 className="contact-h3">Наши данные</h3>
+            <h3 className="quick-links-h3">Наши данные</h3>
 
             <ul>
               <li>Email: contact@gmail.com</li>
@@ -75,11 +61,11 @@ const Footer = () => {
           <div className="copyright"></div>
 
           <div className="social">
-            <a href="#">
+            <a href="https://kipk.edu.kz/">
               <Chrome />
             </a>
 
-            <a href="#">
+            <a href="https://www.instagram.com/kipk_colledji/">
               <Instagram />
             </a>
           </div>

@@ -3,6 +3,7 @@ import {
   ADMIN_ROUTE,
   HOME_ROUTE,
   LOGIN_ROUTE,
+  PROFILE_ROUTE,
   TICKET_ROUTE,
 } from "@/app/consts";
 import {
@@ -13,6 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
+import Cookies from "js-cookie";
 import {
   HelpCircle,
   Home,
@@ -23,8 +25,8 @@ import {
 } from "lucide-react";
 
 const Header = () => {
-  const storedIsAuth = localStorage.getItem("isAuth");
-
+  const storedIsAuth = Cookies.get("isAuthAdmin");
+  const isUser = Cookies.get("isUser");
   return (
     <header>
       <div className="brandname">
@@ -47,14 +49,19 @@ const Header = () => {
       <div className="loginh">
         {storedIsAuth === "true" ? (
           <a href={ADMIN_ROUTE}>
-            Админ панель <Shield />{" "}
+            Админ панель <Shield />
+          </a>
+        ) : isUser === "true" ? (
+          <a href={PROFILE_ROUTE}>
+            Профиль <Home />
           </a>
         ) : (
           <a href={LOGIN_ROUTE}>
-            Войти <User />{" "}
+            Войти <User />
           </a>
         )}
       </div>
+
       <div className="mobile-sheet">
         <Sheet>
           <SheetTrigger className="mobile-tapbtn">
@@ -89,6 +96,12 @@ const Header = () => {
                         <a href={ADMIN_ROUTE}>
                           <Shield />
                           <p>Админ панель</p>{" "}
+                        </a>
+                      </li>
+                    ) : isUser === "true" ? (
+                      <li>
+                        <a href={PROFILE_ROUTE}>
+                          <Home /> <p>Профиль</p>{" "}
                         </a>
                       </li>
                     ) : (

@@ -44,17 +44,7 @@ export const columns: ColumnDef<Tickets>[] = [
   },
   {
     accessorKey: "number",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Номер телефона
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
+    header: () => <div className="text-center">Номер телефона</div>,
   },
   {
     accessorKey: "id",
@@ -72,31 +62,12 @@ export const columns: ColumnDef<Tickets>[] = [
   },
   {
     accessorKey: "message",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Сообщения
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
+    header: () => <div className="text-center">Сообщения</div>,
   },
   {
     accessorKey: "setemoji",
     
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Эмодзи
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
+    header: () => <div className="text-center">Эмодзи</div>,
+
   },
 ]

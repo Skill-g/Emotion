@@ -129,6 +129,15 @@ header {
   cursor: pointer;
 }
 
+.blocks-info {
+  border: solid white 1px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
+
 .button-pressed {
   padding: 10px 20px;
   font-size: 16px;
@@ -224,6 +233,7 @@ footer .social a {
 .top {
   margin-top: 159px;
 }
+
 .toptext {
   display: flex;
   font-size: 30px;
@@ -231,9 +241,11 @@ footer .social a {
   font-weight: 400;
   margin-top: -30px;
 }
+
 .textdiv {
   display: flex;
 }
+
 .topimg {
   display: block;
   margin-left: auto;
@@ -413,6 +425,7 @@ footer .social a {
   font-weight: 700;
   margin-top: 10px;
 }
+
 .services-h3 {
   font-weight: 700;
   margin-top: 10px;
@@ -429,6 +442,7 @@ footer .social a {
   background-position: center 165px;
   background-repeat: no-repeat;
 }
+
 .text-motivetion {
   display: flex;
   vertical-align: top;
@@ -444,6 +458,7 @@ footer .social a {
   background-size: 90%;
   background-position: center;
 }
+
 .full-width-link a {
   width: 100%;
 }
@@ -490,6 +505,7 @@ footer .social a {
   float: left;
   margin-left: -30%;
 }
+
 .blocksvg {
   margin: 0 0 16px 0;
 }
@@ -699,23 +715,122 @@ footer .social a {
 
 .statblock {
   width: 40%;
-  margin-right: auto;
   border-color: #0e7ed6;
   border: 0 solid #e5e7eb;
 }
 
 .ques {
-  height: 253vw;
+  height: 60vw;
 }
 
 .a-form {
   width: 90vw;
 }
 
+.UserInfoBlock {
+  height: 1000px;
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.User {
+  width: 500px;
+  height: 90%;
+  text-align: center;
+  display: flex;
+  float: left;
+  flex-direction: column;
+  background: white;
+  align-items: center;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+.User h1 {
+  margin-top: 20px;
+  background-color: #6c63ff;
+  padding: 15px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.avatar {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.User-chat {
+  margin-left: 10px;
+  width: 800px;
+  height: 90%;
+  display: flex;
+  border-radius: 10px;
+  justify-content: center;
+  background: white;
+}
+
+.User-stat {
+  margin-left: 10px;
+  width: 500px;
+  height: 90%;
+  display: flex;
+  border-radius: 10px;
+  justify-content: center;
+  background: white;
+}
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.fontcards a {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+
+.fon {
+  background: url(../img/userfon.svg);
+  background-size: 120%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.img-avatar {
+  background: url(../img/noavatar.svg);
+  width: 200px;
+  height: 200px;
+  background-size: 70%;
+  border-radius: 30%;
+  border: solid black 2px;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-border-radius: 30%;
+  -moz-border-radius: 30%;
+  -ms-border-radius: 30%;
+  -o-border-radius: 30%;
+  margin-top: 5px;
+}
+
 @media (max-width: 850px) {
   footer .footer-container .footer-top {
     grid-template-columns: 1fr 1fr;
   }
+
   footer .social img {
     height: 30px;
   }
@@ -730,6 +845,7 @@ footer .social a {
   .menu {
     display: none;
   }
+
   .menu-toggle {
     display: block !important;
   }
@@ -767,9 +883,11 @@ footer .social a {
     display: flex;
     justify-content: center;
   }
+
   .sub {
     font-size: 3.8vw !important;
   }
+
   .topimg {
     width: 100% !important;
     max-width: 620px !important;
@@ -782,26 +900,32 @@ footer .social a {
   .buttonhelp {
     font-size: 3vw;
   }
+
   .topimg {
     background-position-y: 0.1vh;
   }
+
   .fontb {
     font-size: 8vw;
   }
+
   .fontbsub {
     font-size: 4.5vw;
     word-wrap: break-word;
     word-break: break-word;
   }
+
   .fontcards {
     flex-direction: column;
     margin: 0 auto;
     width: 90vw;
     font-size: 5vw;
   }
+
   .btn-card {
     margin: 15px 0px 0 0;
   }
+
   .menu-mobile ul li a {
     display: flex;
     margin-top: 20px;
@@ -816,22 +940,28 @@ footer .social a {
     -ms-border-radius: 23px;
     -o-border-radius: 23px;
   }
+
   .menu-mobile p {
     margin-left: 20px;
     text-wrap: nowrap;
   }
+
   .h-screen {
     height: 130vh;
   }
+
   .Ticket-Background {
     padding: 24px;
   }
+
   .blockh2 {
     font-size: 6vw;
   }
+
   header {
     align-items: center;
   }
+
   .card {
     margin: 0 0 20px 0;
     width: 100%;
@@ -884,28 +1014,38 @@ footer .social a {
   .centerhelpfr {
     height: 1348px;
   }
+
+  .ques {
+    height: 664vw;
+  }
 }
+
 @media (max-width: 600px) {
   footer .footer-container .footer-top {
     grid-template-columns: 1fr;
     text-align: center;
   }
+
   footer .footer-bottom .copyright {
     font-size: 16px;
   }
 }
+
 @media (max-width: 200px) {
   body {
     display: none;
   }
 }
+
 @media (min-width: 720px) and (max-width: 768px) {
   .block {
     background-position: 50% 60%;
   }
+
   .HelpFriend {
     height: 2417px;
   }
+
   .right {
     margin-top: 157px;
   }

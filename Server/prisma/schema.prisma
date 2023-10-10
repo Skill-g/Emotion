@@ -8,12 +8,13 @@ datasource db {
 }
 
 model ticket {
-  name     String  @db.Text
-  email    String  @db.Text
-  number   String? @db.Text
-  id       Int     @id @default(autoincrement())
-  message  String? @db.Text
-  setemoji String? @db.Text
+  name     String   @db.Text
+  email    String   @db.Text
+  number   String?  @db.Text
+  id       Int      @id @default(autoincrement())
+  message  String?  @db.Text
+  setemoji String?  @db.Text
+  created  DateTime @default(now())
 }
 
 model users {

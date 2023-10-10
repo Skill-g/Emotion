@@ -16,18 +16,19 @@ import {
 } from "@/components/ui/command";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { ThemeProvider } from "@/components/ui/theme-provider";
+import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 
 const Admin = () => {
   const [, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const isAuth = localStorage.getItem("isAuth");
-    setIsAuthenticated(isAuth === "true");
+    const isAuthAdmin = Cookies.get("isAuthAdmin");
+    setIsAuthenticated(isAuthAdmin === "true");
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("isAuth");
+    Cookies.remove("isAuthAdmin");
     localStorage.removeItem("authExpiration");
     setIsAuthenticated(false);
   };
@@ -48,13 +49,13 @@ const Admin = () => {
                 <a href={ADMIN_PAGE_TICKETS}>Заявки</a>
               </CommandItem>
               <CommandItem>
-                <a href={ADMIN_PAGE_THEMES}>Темы сайта</a>
+                <a href={ADMIN_PAGE_THEMES}>Темы сайта (Данная вкладка в разработке)</a>
               </CommandItem>
               <CommandItem>
-                <a href={ADMIN_PAGE_THEMES}>Чат с пользователями</a>
+                <a href={ADMIN_PAGE_THEMES}>Чат с пользователями (Данная вкладка в разработке)</a>
               </CommandItem>
               <CommandItem>
-                <a href={ADMIN_PAGE_STAT}>Статистика и данные</a>
+                <a href={ADMIN_PAGE_STAT}>Статистика и данные (Данная вкладка почти работает)</a>
               </CommandItem>
               <CommandItem>
                 <a href={HOME_ROUTE}>Выйти</a>
