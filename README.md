@@ -4,33 +4,7 @@
 
 #### Как запустить проект?
 
-```
-1. git clone https://github.com/Skill-g/Emotion.git, npm run install, везде где есть какие то пакеты.
-2. cd Emop && run build - собрать приложение.
-3. После билда при запуске проект не забудьте скачать пакеты для сервера, 'node index.js' для работы серверной части, не забываем что проект SPA, настройте свой веб сервер, у себя я использую такого вида nginx config:
-
-server {
-    listen 80;
-    server_name localhost;
-
-    root /etc/nginx/emotion/dist;
-
-    index index.html;
-    try_files $uri $uri/ /index.html;
-
-location / {
-        if (-f $request_filename) {
-             expires max;
-             break;
-        }
-        if ($request_filename !~ "\.(js|htc|ico|gif|jpg|png|css)$") {
-             rewrite ^(.*) /index.html last;
-        }
-  }
-}
-
-4. В основной директории можно запустить и сервер и клиент через 'npm run all'
-```
+[Документация](https://docs-emotion-hxrqdz2ei-skill-g1s-projects.vercel.app/)
 
 #### В чем цель проекта?
 
