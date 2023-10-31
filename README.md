@@ -4,7 +4,7 @@
 
 #### Как запустить проект?
 
-[Документация](https://docs-emotion-hxrqdz2ei-skill-g1s-projects.vercel.app/)
+[Документация](https://docs-emotion.vercel.app/)
 
 #### В чем цель проекта?
 
