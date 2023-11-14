@@ -13,7 +13,7 @@ const About = () => {
       <div className="container w-screen ques">
         <Accordion type="single" collapsible className="mt-14">
           <AccordionItem value="item-1">
-            <AccordionTrigger className="text-2xl">
+            <AccordionTrigger className="text-about">
               В чем цель проекта?
             </AccordionTrigger>
             <AccordionContent className="text-xl">
@@ -24,7 +24,7 @@ const About = () => {
         </Accordion>
         <Accordion type="single" collapsible className="mt-14">
           <AccordionItem value="item-1">
-            <AccordionTrigger className="text-2xl">
+            <AccordionTrigger className="text-about">
               Какие проблемы он решает?
             </AccordionTrigger>
             <AccordionContent className="text-xl">
@@ -51,7 +51,7 @@ const About = () => {
         </Accordion>
         <Accordion type="single" collapsible className="mt-14">
           <AccordionItem value="item-1">
-            <AccordionTrigger className="text-2xl">Как мы помогаем?</AccordionTrigger>
+            <AccordionTrigger className="text-about">Как мы помогаем?</AccordionTrigger>
             <AccordionContent className="text-xl">
               <b>Консультации с психологом:</b> Студенты могут обратиться к
               нашиму психологу для получения совета и помощи в решении проблем,
@@ -67,7 +67,7 @@ const About = () => {
         </Accordion>
         <Accordion type="single" collapsible className="mt-14">
           <AccordionItem value="item-1">
-            <AccordionTrigger className="text-2xl">Присоединяйтесь к нам</AccordionTrigger>
+            <AccordionTrigger className="text-about">Присоединяйтесь к нам</AccordionTrigger>
             <AccordionContent className="text-xl">
               Мы приглашаем всех студентов и заинтересованных лиц присоединиться
               к нашему проекту и внести свой вклад в создание безопасной и

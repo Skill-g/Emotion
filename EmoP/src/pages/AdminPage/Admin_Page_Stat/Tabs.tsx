@@ -1,3 +1,4 @@
+import { SERVER_URL } from "@/app/consts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { CalendarRange, Heart, HeartOff, Users } from "lucide-react";
@@ -14,7 +15,7 @@ const TabsStat = () => {
 
 useEffect(() => {
 
-    fetch(`http://localhost:8000/StatTickets`)
+    fetch(`${SERVER_URL}/StatTickets`)
       .then((response) => {
         if (response.status !== 200) {
           throw new Error("Не удалось получить данные");

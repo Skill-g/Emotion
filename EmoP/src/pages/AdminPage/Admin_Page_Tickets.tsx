@@ -1,6 +1,6 @@
 import { Tickets, columns } from "@/app/Tickets/columns";
 import { DataTable } from "@/app/Tickets/data-table";
-import { ADMIN_ROUTE } from "@/app/consts";
+import { ADMIN_ROUTE, SERVER_URL } from "@/app/consts";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { ThemeProvider } from "@/components/ui/theme-provider";
@@ -9,7 +9,7 @@ import React from "react";
 
 async function getData(): Promise<Tickets[]> {
   try {
-    const response = await fetch("http://localhost:8000/getTickets");
+    const response = await fetch(`${SERVER_URL}/getTickets`);
     if (!response.ok) {
       throw new Error("Ошибка при получении данных");
     }

@@ -9,3 +9,7 @@ export const TICKET_ROUTE = '/ticket'
 export const ADMIN_PAGE_PROFILE = '/admin/profile'
 export const ADMIN_PAGE_STAT = '/admin/stat'
 export const PROFILE_ROUTE = '/profile'
+export const TEST_ROUTE = '/test'
+export const ADMIN_PAGE_TESTCREATE = '/admin/test'
+export const SERVER_URL = 'http://localhost:8000/api'
+// export const SERVER_URL = 'https://emotion.kipk.edu.kz/server/api' // ! Server api

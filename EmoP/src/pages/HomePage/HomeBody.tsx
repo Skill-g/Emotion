@@ -45,30 +45,25 @@ const HomeBody = () => {
             членов коллектива со стороны другого, но также часто группы лиц
           </h4>
           <div className="fontcards">
-          <a href={ABOUT_ROUTE}>
-            <button className="Parents btn-card">
-              
-              <Heart size={38} className="fill-cyan-700" />
-              Родителям <ArrowRight size={38} />
-              
-            </button>
+            <a href={ABOUT_ROUTE}>
+              <button className="Parents btn-card">
+                <Heart size={38} className="fill-cyan-700" />
+                Родителям <ArrowRight size={38} />
+              </button>
             </a>
             <a href={ABOUT_ROUTE}>
-            <button className="Students btn-card">
-
-              <User size={38} className="fill-cyan-700" />
-              Студентам
-              <ArrowRight size={38} />
-              
-            </button>
+              <button className="Students btn-card">
+                <User size={38} className="fill-cyan-700" />
+                Абитурентам
+                <ArrowRight size={38} />
+              </button>
             </a>
             <a href={ABOUT_ROUTE}>
-            <button className="Students btn-card">
-              <GraduationCap size={38} className="fill-cyan-700" />
-              Студентам
-              <ArrowRight size={38} />
-
-            </button>
+              <button className="Students btn-card">
+                <GraduationCap size={38} className="fill-cyan-700" />
+                Студентам
+                <ArrowRight size={38} />
+              </button>
             </a>
           </div>
         </div>

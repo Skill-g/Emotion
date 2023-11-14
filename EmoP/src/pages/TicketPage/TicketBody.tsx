@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { SERVER_URL } from "@/app/consts";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   HoverCard,
@@ -7,6 +8,7 @@ import {
 } from "@/components/ui/hover-card";
 import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/components/ui/use-toast";
+import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import TextMask from "react-text-mask";
 
@@ -83,6 +85,17 @@ const TicketBody = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    
+    const hasSentTicketToday = Cookies.get("ticketSent");
+    if (hasSentTicketToday) {
+      title = "Ошибка";
+      description = "Вы уже отправили тикет сегодня.";
+      toast({
+        title: title,
+        description: description,
+      });
+      return;
+    }
 
     if (!checked && formData.setemoji === "") {
       title = "Ошибка";
@@ -95,7 +108,7 @@ const TicketBody = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/addTicket", {
+      const response = await fetch(`${SERVER_URL}/addTicket`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -104,6 +117,7 @@ const TicketBody = () => {
       });
 
       if (response.ok) {
+        Cookies.set("ticketSent", "true", { expires: 1 });
         title = "Отправлено!";
         description = "В скором времени мы примем меры";
       } else {

@@ -1,3 +1,4 @@
+import { SERVER_URL } from "@/app/consts";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -38,7 +39,7 @@ export function TabsProfile() {
     const { name, newname, currentPassword, newPassword } = formData;
 
     try {
-      const response = await fetch("http://localhost:8000/updateUser", {
+      const response = await fetch(`${SERVER_URL}/updateUser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

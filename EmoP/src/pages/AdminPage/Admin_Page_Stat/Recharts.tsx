@@ -1,9 +1,10 @@
+import { SERVER_URL } from "@/app/consts";
 import { useEffect, useState } from "react";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 const Recharts = () => {
   const [monthlyStats, setMonthlyStats] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:8000/MonthlyStats`)
+    fetch(`${SERVER_URL}/MonthlyStats`)
       .then((response) => {
         if (response.status !== 200) {
           throw new Error("Не удалось получить данные");

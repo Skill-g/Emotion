@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { LOGIN_ROUTE, REG_ROUTE } from "@/app/consts";
+import { LOGIN_ROUTE, REG_ROUTE, SERVER_URL } from "@/app/consts";
 import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/components/ui/use-toast";
 import Footer from "@/shared/Footer";
@@ -17,8 +17,7 @@ const TicketBody = () => {
 
   const isAuthedAdmin = Cookies.get("isAuthAdmin") === "true";
   const isUserAuthed = Cookies.get("isUser") === "true";
-  console.log (isAuthedAdmin);
-  console.log (isUserAuthed);
+
   const handleInputChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -28,7 +27,7 @@ const TicketBody = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/login", {
+      const response = await fetch(`${SERVER_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

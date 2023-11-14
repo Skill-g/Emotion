@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { LOGIN_ROUTE } from "@/app/consts";
+import { LOGIN_ROUTE, SERVER_URL } from "@/app/consts";
 import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/components/ui/use-toast";
 import Footer from "@/shared/Footer";
@@ -38,7 +38,7 @@ const RegistrationBody = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/reg", {
+      const response = await fetch(`${SERVER_URL}/reg`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

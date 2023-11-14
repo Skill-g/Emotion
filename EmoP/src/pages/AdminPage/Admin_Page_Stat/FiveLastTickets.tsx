@@ -1,3 +1,4 @@
+import { SERVER_URL } from "@/app/consts";
 import { useEffect, useState } from "react";
 
 const FiveLastTickets = () => {
@@ -18,7 +19,7 @@ const FiveLastTickets = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:8000/GetFiveTickets`)
+    fetch(`${SERVER_URL}/GetFiveTickets`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Не удалось получить данные");

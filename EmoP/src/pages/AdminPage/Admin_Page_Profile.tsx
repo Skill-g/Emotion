@@ -9,12 +9,12 @@ const Admin_Page_Profile = () => {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div className="containers flex justify-center w-auto h-screen content-center flex-wrap">
+      <ModeToggle></ModeToggle>
         <a href={ADMIN_ROUTE}>
           <Button className="absolute left-5 top-5 text-center ">
             <ArrowLeft />
           </Button>
         </a>
-        <ModeToggle></ModeToggle>
         <div className="flex justify-center h-80 a-form">
           <TabsProfile />
         </div>
