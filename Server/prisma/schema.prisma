@@ -22,4 +22,12 @@ model users {
   login    String @db.Text
   password String @db.Text
   role     String @db.Text
+  DateOfReg  DateTime @default(now())
 }
+
+// model FormPsychone {
+//   id Int @id @default(autoincrement())
+
+//   created DateTime @default(now())
+// }
+

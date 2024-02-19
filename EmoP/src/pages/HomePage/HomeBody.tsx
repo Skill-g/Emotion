@@ -15,6 +15,7 @@ import {
 const HomeBody = () => {
   return (
     <div className="containers">
+      
       <div className="top">
         <div className="topimg">
           <div className="textdiv">
@@ -27,9 +28,9 @@ const HomeBody = () => {
                 </h1>
                 <div className="sub">
                   <p>Если у вас имеются проблемы, обратитесь к нам</p>
-                  <button className="buttonhelp mt-2">
-                    <a href={TICKET_ROUTE}>Получить помощь</a>
-                  </button>
+                  <a className="buttonhelp mt-2" href={TICKET_ROUTE}>
+                    Получить помощь
+                  </a>
                 </div>
               </div>
             </div>

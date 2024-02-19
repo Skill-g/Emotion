@@ -18,7 +18,7 @@ const Admin_Page_Stat = () => {
         </a>
         <ModeToggle></ModeToggle>
         <div>
-        <TabsStat></TabsStat>
+          <TabsStat></TabsStat>
         </div>
         <Recharts></Recharts>
         <FiveLastTickets></FiveLastTickets>

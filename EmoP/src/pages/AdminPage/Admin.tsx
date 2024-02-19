@@ -1,11 +1,10 @@
 import {
   ADMIN_PAGE_PROFILE,
   ADMIN_PAGE_STAT,
-  ADMIN_PAGE_TESTCREATE,
   ADMIN_PAGE_THEMES,
   ADMIN_PAGE_TICKETS,
   HOME_ROUTE,
-  LOGIN_ROUTE,
+  LOGIN_ROUTE
 } from "@/app/consts";
 import {
   Command,
@@ -51,17 +50,7 @@ const Admin = () => {
               </CommandItem>
               <CommandItem>
                 <a href={ADMIN_PAGE_THEMES}>
-                  Темы сайта (Данная вкладка в разработке)
-                </a>
-              </CommandItem>
-              <CommandItem>
-                <a href={ADMIN_PAGE_THEMES}>
                   Чат с пользователями (Данная вкладка в разработке)
-                </a>
-              </CommandItem>
-              <CommandItem>
-                <a href={ADMIN_PAGE_TESTCREATE}>
-                  Создание тестов (Данная вкладка в разработке)
                 </a>
               </CommandItem>
               <CommandItem>

@@ -4,7 +4,7 @@ import {
   HOME_ROUTE,
   LOGIN_ROUTE,
   PROFILE_ROUTE,
-  TICKET_ROUTE,
+  TICKET_ROUTE
 } from "@/app/consts";
 import {
   Sheet,
@@ -21,7 +21,7 @@ import {
   Menu,
   MessageSquare,
   Shield,
-  User,
+  User
 } from "lucide-react";
 
 const Header = () => {

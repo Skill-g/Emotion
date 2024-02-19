@@ -5,8 +5,9 @@ const Profile = () => {
   return (
     <>
       <Header></Header>
-      <div className="containers fon">
-        <div className="UserInfoBlock">
+      <div className="containers flex w-screen h-screen fon justify-center items-center">
+        <h1 className="text-4xl">Эта страница в разработке, можете пока оставить обращение!</h1>
+        {/* <div className="UserInfoBlock">
         <div className="profile">
         <div className="User">
             
@@ -28,7 +29,7 @@ const Profile = () => {
             stat
             </div>
             </div>
-        </div>
+        </div> */}
       </div>
       <Footer></Footer>
     </>
